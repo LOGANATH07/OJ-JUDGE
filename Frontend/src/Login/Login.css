@@ -1,0 +1,12 @@
+.Login-background{
+    min-height: 100vh;
+    min-width: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Login-box{
+    min-width: 50vh;
+    min-height: 50vh;
+}
