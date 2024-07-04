@@ -17,15 +17,17 @@ const executeCpp = async (filePath,inputFile) => {
     console.log(outFilePath);
 
     return new Promise((resolve, reject) => {
-        const process = exec(`g++ ${filePath} -o ${outFilePath} && cd ${outPath} && .\\${jobId}.exe`
+        const process = exec(`g++ ${filePath} -o ${outFilePath} && cd ${outPath} && ./${jobId}.exe`
             , (error, stdout, stderr) => {
             if(error) {
                 reject({error,stderr});
             } 
             if(stderr) {
+                console.log(stderr);
                 reject(stderr);
             }
             else {
+                console.log(stdout);
                 resolve(stdout);
             }
         });
