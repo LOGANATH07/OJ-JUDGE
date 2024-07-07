@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_URL = "http://13.201.46.22:5000";
+// const API_URL = "http://localhost:8000";
+const API_URL = "http://13.127.10.79:8000";
+// const API_URL = "http://13.201.46.22:5000";
 
 export const loginUser = async (email, password) => {
     try {
@@ -19,6 +21,24 @@ export const registerUser = async(firstname, lastname, email, password) => {
         return response.data;
     } catch (error) {
         console.log('Error while trying to register');
+    }
+}
+
+export const postProblem = async(title,description,problemId,level,category)=>{
+    try {
+        const response = await axios.post(`${API_URL}/postproblem`, {title,description,problemId,level,category});
+        return response.data;
+    } catch (error) {
+        console.log('Error while trying to post problem');
+    }
+}
+
+export const postTestCases = async(problemId,testcases)=>{
+    try {
+        const response = await axios.post(`${API_URL}/posttestcases`,{problemId,testcases});
+        return response.data;
+    } catch (error) {
+        console.log('Error while trying to post test cases');
     }
 }
 

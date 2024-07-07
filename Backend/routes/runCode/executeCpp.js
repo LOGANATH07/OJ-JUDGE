@@ -16,6 +16,8 @@ const executeCpp = async (filePath,inputFile) => {
     const outFilePath = path.join(outPath, `${jobId}.exe`);
     console.log(outFilePath);
 
+    // for linux the command is g++ ${filePath} -o ${outFilePath} && cd ${outPath} && ./${jobId}.exe
+    // for windows the command is g++ ${filePath} -o ${outFilePath} && cd ${outPath} && .\\${jobId}.exe
     return new Promise((resolve, reject) => {
         const process = exec(`g++ ${filePath} -o ${outFilePath} && cd ${outPath} && ./${jobId}.exe`
             , (error, stdout, stderr) => {

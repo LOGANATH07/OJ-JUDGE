@@ -19,7 +19,8 @@ const posttestcases = async (req, res) => {
         res.status(201).json({
             status:201,
             message: 'Problem Testcase created successfully',
-            data: newProblemtestcase
+            data: newProblemtestcase,
+            success: true
         })
 
     } catch (error) {

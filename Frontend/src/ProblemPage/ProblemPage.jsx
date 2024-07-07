@@ -2,14 +2,16 @@ import { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import "./ProblemPage.css"
 import { getTestcasesFromServer, runCodeCpp } from "../service/api";
+import { HomePage } from "../HomePage/HomePage";
 
 
-function ProblemPage(problem,{HomeorProblem}) {
-    const [language, setLanguage] = useState("C++");
+function ProblemPage(problem) {
+    const [language, setLanguage] = useState("cpp");
     const [code, setCode] = useState("");
     const [input, setInput] = useState("")
     const [output, setOutput] = useState("");
     const [coderesults, setCoderesults] = useState("")
+    const [goBack, setGoBack] = useState(false)
     // console.log(problem);
     const {title,description,problemId,level,category} = problem.Problem;
 
@@ -47,13 +49,12 @@ function ProblemPage(problem,{HomeorProblem}) {
         }
     }
 
-
-    return (
+    const currentProblem = (
         <>
         <div className="d-md-flex min-vh-100 min-vw-100 flex-row">
             <div id="infoBox" className=" mh-100 border border-dark p-2">
                 <div>
-                    <button className="button btn-outline-dark" onClick={()=>{HomeorProblem(false)}}>
+                    <button className="button btn-outline-dark" onClick={()=>{setGoBack(true)}}>
                         Previous
                     </button>
                 </div>
@@ -101,6 +102,14 @@ function ProblemPage(problem,{HomeorProblem}) {
                 </div>
             </div>
         </div>
+        </>
+    )
+
+
+    return (
+        <>
+        {!goBack && currentProblem }
+        {goBack && <HomePage />}
         </>
     )
 }

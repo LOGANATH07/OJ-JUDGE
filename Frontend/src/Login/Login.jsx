@@ -5,21 +5,27 @@ import "./Login.css"
 import { loginUser } from "../service/api";
 import { useState } from "react";
 import { HomePage } from "../HomePage/HomePage";
+import { PostProblem } from "../PostProblem/PostProblem";
 
 // eslint-disable-next-line react/prop-types
 function Login({isLoginOrRegister}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const print = async () => {
         try {
             console.log(email,password);
             const response = await loginUser(email, password);
-            console.log(response.success);
+            console.log(response.user.email);
             if(response.success) {
                 setIsUserLoggedIn(true);
                 console.log('User logged in successfully');
+                if(response.user.email=='loganvegeta7@gmail.com') {
+                    console.log("Welcome Admin")
+                    setIsAdmin(true);
+                }
             }
             return response;
         } catch (error) {
@@ -62,7 +68,8 @@ function Login({isLoginOrRegister}) {
     return (
         <> 
             { !isUserLoggedIn && loginPage}
-            {isUserLoggedIn && <HomePage />}
+            {isUserLoggedIn && isAdmin && <PostProblem />}
+            {isUserLoggedIn && !isAdmin && <HomePage />}
         </>
         )
 }
