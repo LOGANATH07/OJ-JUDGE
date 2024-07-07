@@ -1,8 +1,9 @@
 import axios from "axios";
 
 // const API_URL = "http://localhost:8000";
-const API_URL = "http://13.127.10.79:8000";
+
 // const API_URL = "http://13.201.46.22:5000";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const loginUser = async (email, password) => {
     try {
